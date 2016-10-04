@@ -1,0 +1,15 @@
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\ServerIntegTests.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\ServerIntegTests.pdb
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Hl7.Fhir.DSTU2.Core.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Web.Http.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Hl7.Fhir.DSTU2.Core.pdb
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Hl7.Fhir.DSTU2.Core.xml
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Web.Http.xml
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\obj\Debug\ServerIntegTests.csprojResolveAssemblyReference.cache
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\obj\Debug\ServerIntegTests.dll
+C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\obj\Debug\ServerIntegTests.pdb
