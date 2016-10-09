@@ -31,10 +31,31 @@ namespace ServerIntegTests
             {
                 new ContactPoint()
                 {
-                    
+                    System = ContactPoint.ContactPointSystem.Phone,
+                    Value = "022381827",
+                    Use = ContactPoint.ContactPointUse.Home,
+                },
+                new ContactPoint()
+                {
+                   System = ContactPoint.ContactPointSystem.Email,
+                   Value = "myEmail@emailaddress.com",
+                   Use = ContactPoint.ContactPointUse.Home
                 }
-            }
-        }
+            },
+            Address = new List<Address>()
+            {
+                new Address()
+                {
+                    City = "Sydney",
+                    Country = "Australia",
+                    Use = Address.AddressUse.Home,
+                    Line = new List<string>() {"123 Happy Street", "Test Building" },
+                    State = "NSW",
+                    PostalCode = "2034"
+                }
+            },
+            Gender = AdministrativeGender.Male,
+        };
 
         public static  Device device1 = new Device()
         {
@@ -75,7 +96,7 @@ namespace ServerIntegTests
             Status = Device.DeviceStatus.Available,
             Manufacturer = "Acme Devices, Inc",
             Model = "OD 9-0",
-            LotNumber = "43453424"
+            LotNumber = "12345678"
         };
     }
 }
