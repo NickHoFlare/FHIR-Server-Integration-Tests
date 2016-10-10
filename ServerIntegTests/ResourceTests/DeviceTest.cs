@@ -57,28 +57,28 @@ namespace ServerIntegTests.ResourceTests
         [TestMethod]
         public void TestFhirCreate()
         {
-            Device device1 = MockedResources.device1;
-            Device device2 = MockedResources.device2;
+            Device device1 = MockedResources.Device1;
+            Device device2 = MockedResources.Device2;
 
             var device1Entry = fhirClient.Create(device1);
             var device2Entry = fhirClient.Create(device2);
 
             Assert.AreEqual("4", device1Entry.Id);
             Assert.AreEqual("5", device2Entry.Id);
-            Assert.AreEqual(MockedResources.device1.Model, device1Entry.Model);
-            Assert.AreEqual(MockedResources.device2.Model, device2Entry.Model);
-            Assert.AreEqual(MockedResources.device1.Type.Text, device1Entry.Type.Text);
-            Assert.AreEqual(MockedResources.device2.Type.Text, device2Entry.Type.Text);
+            Assert.AreEqual(MockedResources.Device1.Model, device1Entry.Model);
+            Assert.AreEqual(MockedResources.Device2.Model, device2Entry.Model);
+            Assert.AreEqual(MockedResources.Device1.Type.Text, device1Entry.Type.Text);
+            Assert.AreEqual(MockedResources.Device2.Type.Text, device2Entry.Type.Text);
         }
 
         [TestMethod]
         public void TestHttpCreate()
         {
             // Successful creation
-            string device1Json = FhirSerializer.SerializeResourceToJson(MockedResources.device1);
-            string device2Json = FhirSerializer.SerializeResourceToJson(MockedResources.device2);
-            string device1Xml = FhirSerializer.SerializeResourceToXml(MockedResources.device1);
-            string device2Xml = FhirSerializer.SerializeResourceToXml(MockedResources.device2);
+            string device1Json = FhirSerializer.SerializeResourceToJson(MockedResources.Device1);
+            string device2Json = FhirSerializer.SerializeResourceToJson(MockedResources.Device2);
+            string device1Xml = FhirSerializer.SerializeResourceToXml(MockedResources.Device1);
+            string device2Xml = FhirSerializer.SerializeResourceToXml(MockedResources.Device2);
 
             HttpRequestMessage request1 = new HttpRequestMessage(HttpMethod.Post, baseUrl + "/Device")
             {
@@ -106,8 +106,32 @@ namespace ServerIntegTests.ResourceTests
             Assert.AreEqual(HttpStatusCode.Created, response3.StatusCode);
             Assert.AreEqual(HttpStatusCode.Created, response4.StatusCode);
 
+            // Check that record entries are created correctly
+            var recordResponse1 = httpClient.GetAsync(baseUrl + "/Devicerecord/4").Result;
+            var recordResponse2 = httpClient.GetAsync(baseUrl + "/Devicerecord/5").Result;
+            var recordResponse3 = httpClient.GetAsync(baseUrl + "/Devicerecord/6").Result;
+            var recordResponse4 = httpClient.GetAsync(baseUrl + "/Devicerecord/7").Result;
+
+            string record1 = recordResponse1.Content.ReadAsStringAsync().Result;
+            string record2 = recordResponse2.Content.ReadAsStringAsync().Result;
+            string record3 = recordResponse3.Content.ReadAsStringAsync().Result;
+            string record4 = recordResponse4.Content.ReadAsStringAsync().Result;
+
+            Assert.IsTrue(record1.Contains("\"DeviceId\":4"));
+            Assert.IsTrue(record1.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record1.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record2.Contains("\"DeviceId\":5"));
+            Assert.IsTrue(record2.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record2.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record3.Contains("\"DeviceId\":6"));
+            Assert.IsTrue(record3.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record3.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record4.Contains("\"DeviceId\":7"));
+            Assert.IsTrue(record4.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record4.Contains("Action\":\"CREATE"));
+
             // Case where ID is present
-            Device deviceIdPresent = MockedResources.device1;
+            Device deviceIdPresent = MockedResources.Device1;
             deviceIdPresent.Id = "10";
             string deviceIdPresentString = FhirSerializer.SerializeResourceToXml(deviceIdPresent);
 
@@ -120,7 +144,7 @@ namespace ServerIntegTests.ResourceTests
             Assert.AreEqual(HttpStatusCode.BadRequest, response5.StatusCode);
 
             // Case where wrong type of resource is provided
-            string patient = FhirSerializer.SerializeResourceToJson(MockedResources.patient1);
+            string patient = FhirSerializer.SerializeResourceToJson(MockedResources.Patient1);
             HttpRequestMessage request6 = new HttpRequestMessage(HttpMethod.Post, baseUrl + "/Device")
             {
                 Content = new StringContent(patient, Encoding.UTF8, "application/json+fhir")
@@ -204,6 +228,30 @@ namespace ServerIntegTests.ResourceTests
             Assert.AreEqual(HttpStatusCode.OK, response3.StatusCode);
             Assert.AreEqual(HttpStatusCode.OK, response4.StatusCode);
 
+            // Check that record entries are created correctly
+            var recordResponse1 = httpClient.GetAsync(baseUrl + "/Devicerecord/4").Result;
+            var recordResponse2 = httpClient.GetAsync(baseUrl + "/Devicerecord/5").Result;
+            var recordResponse3 = httpClient.GetAsync(baseUrl + "/Devicerecord/6").Result;
+            var recordResponse4 = httpClient.GetAsync(baseUrl + "/Devicerecord/7").Result;
+
+            string record1 = recordResponse1.Content.ReadAsStringAsync().Result;
+            string record2 = recordResponse2.Content.ReadAsStringAsync().Result;
+            string record3 = recordResponse3.Content.ReadAsStringAsync().Result;
+            string record4 = recordResponse4.Content.ReadAsStringAsync().Result;
+
+            Assert.IsTrue(record1.Contains("\"DeviceId\":2"));
+            Assert.IsTrue(record1.Contains("\"VersionId\":2"));
+            Assert.IsTrue(record1.Contains("Action\":\"UPDATE"));
+            Assert.IsTrue(record2.Contains("\"DeviceId\":3"));
+            Assert.IsTrue(record2.Contains("\"VersionId\":2"));
+            Assert.IsTrue(record2.Contains("Action\":\"UPDATE"));
+            Assert.IsTrue(record3.Contains("\"DeviceId\":2"));
+            Assert.IsTrue(record3.Contains("\"VersionId\":3"));
+            Assert.IsTrue(record3.Contains("Action\":\"UPDATE"));
+            Assert.IsTrue(record4.Contains("\"DeviceId\":3"));
+            Assert.IsTrue(record4.Contains("\"VersionId\":3"));
+            Assert.IsTrue(record4.Contains("Action\":\"UPDATE"));
+
             // Successful create(JSON)
             device1.Id = "4";
             device2.Id = "5";
@@ -243,8 +291,32 @@ namespace ServerIntegTests.ResourceTests
             Assert.AreEqual(HttpStatusCode.Created, response7.StatusCode);
             Assert.AreEqual(HttpStatusCode.Created, response8.StatusCode);
 
+            // Check that record entries are created correctly
+            var recordResponse5 = httpClient.GetAsync(baseUrl + "/Devicerecord/8").Result;
+            var recordResponse6 = httpClient.GetAsync(baseUrl + "/Devicerecord/9").Result;
+            var recordResponse7 = httpClient.GetAsync(baseUrl + "/Devicerecord/10").Result;
+            var recordResponse8 = httpClient.GetAsync(baseUrl + "/Devicerecord/11").Result;
+
+            string record5 = recordResponse5.Content.ReadAsStringAsync().Result;
+            string record6 = recordResponse6.Content.ReadAsStringAsync().Result;
+            string record7 = recordResponse7.Content.ReadAsStringAsync().Result;
+            string record8 = recordResponse8.Content.ReadAsStringAsync().Result;
+
+            Assert.IsTrue(record5.Contains("\"DeviceId\":4"));
+            Assert.IsTrue(record5.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record5.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record6.Contains("\"DeviceId\":5"));
+            Assert.IsTrue(record6.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record6.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record7.Contains("\"DeviceId\":6"));
+            Assert.IsTrue(record7.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record7.Contains("Action\":\"CREATE"));
+            Assert.IsTrue(record8.Contains("\"DeviceId\":7"));
+            Assert.IsTrue(record8.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record8.Contains("Action\":\"CREATE"));
+
             // Case where wrong type of resource is provided
-            string patient = FhirSerializer.SerializeResourceToJson(MockedResources.patient1);
+            string patient = FhirSerializer.SerializeResourceToJson(MockedResources.Patient1);
             HttpRequestMessage request9 = new HttpRequestMessage(HttpMethod.Put, baseUrl + "/Device/8")
             {
                 Content = new StringContent(patient, Encoding.UTF8, "application/json+fhir")
@@ -315,6 +387,20 @@ namespace ServerIntegTests.ResourceTests
 
             Assert.AreEqual(HttpStatusCode.NoContent, response1.StatusCode);
             Assert.AreEqual(HttpStatusCode.NoContent, response2.StatusCode);
+
+            // Check that record entries are created correctly
+            var recordResponse5 = httpClient.GetAsync(baseUrl + "/Devicerecord/4").Result;
+            var recordResponse6 = httpClient.GetAsync(baseUrl + "/Devicerecord/5").Result;
+
+            string record5 = recordResponse5.Content.ReadAsStringAsync().Result;
+            string record6 = recordResponse6.Content.ReadAsStringAsync().Result;
+
+            Assert.IsTrue(record5.Contains("\"DeviceId\":1"));
+            Assert.IsTrue(record5.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record5.Contains("Action\":\"DELETE"));
+            Assert.IsTrue(record6.Contains("\"DeviceId\":2"));
+            Assert.IsTrue(record6.Contains("\"VersionId\":1"));
+            Assert.IsTrue(record6.Contains("Action\":\"DELETE"));
 
             // Case where attempt delete on non-existent resource
             var response3 = httpClient.DeleteAsync(baseUrl + "/Device/4").Result;

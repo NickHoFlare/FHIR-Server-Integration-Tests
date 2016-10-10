@@ -1,7 +1,6 @@
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\ServerIntegTests.dll
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\ServerIntegTests.pdb
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Hl7.Fhir.DSTU2.Core.dll
-C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\nicho\Dropbox\Computing\Thesis\Implementations\ServerIntegTests\ServerIntegTests\bin\Debug\System.Web.Http.dll
